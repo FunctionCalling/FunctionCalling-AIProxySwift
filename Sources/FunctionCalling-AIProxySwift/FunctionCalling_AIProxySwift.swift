@@ -5,6 +5,7 @@ import FunctionCalling
 import AIProxy
 
 extension ToolContainer {
+    // swiftlint:disable:next line_length
     // https://github.com/lzell/AIProxySwift?tab=readme-ov-file#how-to-use-openai-structured-outputs-json-schemas-in-a-tool-call
     func toOpenAITools(strict: Bool = false) -> [OpenAIChatCompletionTool] {
         guard let allTools else { return [] }
@@ -18,7 +19,7 @@ extension ToolContainer {
             )
         }
     }
-    
+
     // https://github.com/lzell/AIProxySwift?tab=readme-ov-file#how-to-use-streaming-tool-calls-with-anthropic
     func toAnthropicTools() -> [AnthropicTool] {
         guard let allTools else { return [] }
@@ -32,6 +33,7 @@ extension ToolContainer {
         }
     }
 
+    // swiftlint:disable:next line_length
     // https://github.com/lzell/AIProxySwift?tab=readme-ov-file#how-to-make-a-tool-call-request-with-llama-and-togetherai
     func toTogetherAITools() -> [TogetherAITool] {
         guard let allTools else { return [] }

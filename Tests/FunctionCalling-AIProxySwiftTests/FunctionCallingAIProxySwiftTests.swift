@@ -3,15 +3,15 @@ import XCTest
 import FunctionCalling
 import AIProxy
 
-final class FunctionCalling_AIProxySwiftTests: XCTestCase {
-    
+final class FunctionCallingAIProxySwiftTests: XCTestCase {
+
     var toolContainer: ToolContainer!
 
     struct MockToolContainer: ToolContainer {
-        func execute(methodName name: String, parameters: [String : Any]) async -> String {
+        func execute(methodName name: String, parameters: [String: Any]) async -> String {
             ""
         }
-        
+
         let allTools: [Tool]?
 
         let allToolsJSONString: String = ""
@@ -29,7 +29,14 @@ final class FunctionCalling_AIProxySwiftTests: XCTestCase {
             inputSchema: .init(
                 type: .object,
                 properties: [
-                    "testParam": .init(type: .string, description: "A test parameter", enumValues: ["option1", "option2"])
+                    "testParam": .init(
+                        type: .string,
+                        description: "A test parameter",
+                        enumValues: [
+                            "option1",
+                            "option2"
+                        ]
+                    )
                 ],
                 requiredProperties: ["testParam"]
             )
@@ -37,10 +44,12 @@ final class FunctionCalling_AIProxySwiftTests: XCTestCase {
 
         toolContainer = MockToolContainer(allTools: [tool])
     }
-    
+
+    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable function_body_length
     func testToOpenAITools() throws {
         let openAITools = toolContainer.toOpenAITools()
-        
+
         XCTAssertEqual(openAITools.count, 1)
 
         let openAITool = try XCTUnwrap(openAITools.first)
@@ -76,10 +85,10 @@ final class FunctionCalling_AIProxySwiftTests: XCTestCase {
             return
         }
 
-        let requiredProperties = required.compactMap { r in
-            switch r {
-            case .string(let p):
-                return p
+        let requiredProperties = required.compactMap { requiredProperty in
+            switch requiredProperty {
+            case .string(let propertyName):
+                return propertyName
             default:
                 return nil
             }
@@ -120,20 +129,20 @@ final class FunctionCalling_AIProxySwiftTests: XCTestCase {
 
         XCTAssertEqual(enumValueArray.count, 2)
 
-        let enumValues = enumValueArray.compactMap { e in
-            switch e {
-            case .string(let v):
-                return v
+        let enumValues = enumValueArray.compactMap { enumValue in
+            switch enumValue {
+            case .string(let value):
+                return value
             default:
                 return nil
             }
         }
         XCTAssertEqual(enumValues, ["option1", "option2"])
     }
-    
+
     func testToAnthropicTools() throws {
         let anthropicTools = toolContainer.toAnthropicTools()
-        
+
         XCTAssertEqual(anthropicTools.count, 1)
         XCTAssertEqual(anthropicTools[0].name, "testTool")
         XCTAssertEqual(anthropicTools[0].description, "A test tool")
@@ -154,10 +163,10 @@ final class FunctionCalling_AIProxySwiftTests: XCTestCase {
             return
         }
 
-        let requiredProperties = required.compactMap { r in
-            switch r {
-            case .string(let p):
-                return p
+        let requiredProperties = required.compactMap { requiredProperty in
+            switch requiredProperty {
+            case .string(let propertyName):
+                return propertyName
             default:
                 return nil
             }
@@ -198,24 +207,24 @@ final class FunctionCalling_AIProxySwiftTests: XCTestCase {
 
         XCTAssertEqual(enumValueArray.count, 2)
 
-        let enumValues = enumValueArray.compactMap { e in
-            switch e {
-            case .string(let v):
-                return v
+        let enumValues = enumValueArray.compactMap { enumValue in
+            switch enumValue {
+            case .string(let value):
+                return value
             default:
                 return nil
             }
         }
         XCTAssertEqual(enumValues, ["option1", "option2"])
     }
-    
+
     func testToTogetherAITools() throws {
         let togetherAITools = toolContainer.toTogetherAITools()
-        
+
         XCTAssertEqual(togetherAITools.count, 1)
         XCTAssertEqual(togetherAITools[0].function.name, "testTool")
         XCTAssertEqual(togetherAITools[0].function.description, "A test tool")
-        
+
         // inputSchema
         let parameters = togetherAITools[0].function.parameters
 
@@ -232,10 +241,10 @@ final class FunctionCalling_AIProxySwiftTests: XCTestCase {
             return
         }
 
-        let requiredProperties = required.compactMap { r in
-            switch r {
-            case .string(let p):
-                return p
+        let requiredProperties = required.compactMap { requiredProperty in
+            switch requiredProperty {
+            case .string(let propertyName):
+                return propertyName
             default:
                 return nil
             }
@@ -276,14 +285,16 @@ final class FunctionCalling_AIProxySwiftTests: XCTestCase {
 
         XCTAssertEqual(enumValueArray.count, 2)
 
-        let enumValues = enumValueArray.compactMap { e in
-            switch e {
-            case .string(let v):
-                return v
+        let enumValues = enumValueArray.compactMap { enumValue in
+            switch enumValue {
+            case .string(let value):
+                return value
             default:
                 return nil
             }
         }
         XCTAssertEqual(enumValues, ["option1", "option2"])
     }
+    // swiftlint:enable cyclomatic_complexity
+    // swiftlint:enable function_body_length
 }

@@ -13,7 +13,10 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "FunctionCalling-AIProxySwift",
-            targets: ["FunctionCalling-AIProxySwift"]),
+            targets: [
+                "FunctionCalling-AIProxySwift"
+            ]
+        )
     ],
     dependencies: [
         .package(url: "https://github.com/fumito-ito/FunctionCalling", from: "0.4.0"),
@@ -30,7 +33,9 @@ let package = Package(
             ]),
         .testTarget(
             name: "FunctionCalling-AIProxySwiftTests",
-            dependencies: ["FunctionCalling-AIProxySwift"]
-        ),
+            dependencies: [
+                "FunctionCalling-AIProxySwift"
+            ]
+        )
     ]
 )
