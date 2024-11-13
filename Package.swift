@@ -19,7 +19,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/fumito-ito/FunctionCalling", from: "0.4.0"),
+        .package(url: "https://github.com/fumito-ito/FunctionCalling", from: "0.5.0"),
         .package(url: "https://github.com/lzell/AIProxySwift.git", from: "0.34.0")
     ],
     targets: [
