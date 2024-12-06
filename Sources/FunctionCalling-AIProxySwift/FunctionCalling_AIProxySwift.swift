@@ -6,6 +6,9 @@ import AIProxy
 
 extension ToolContainer {
     public typealias AIProxyOpenAITool = OpenAIChatCompletionRequestBody.Tool
+    public typealias AIProxyAnthropicTool = AnthropicTool
+    public typealias AIProxyTogetherAITool = TogetherAITool
+
     // swiftlint:disable:next line_length
     // https://github.com/lzell/AIProxySwift?tab=readme-ov-file#how-to-use-openai-structured-outputs-json-schemas-in-a-tool-call
     func toOpenAITools(strict: Bool = false) -> [AIProxyOpenAITool] {
@@ -22,11 +25,11 @@ extension ToolContainer {
     }
 
     // https://github.com/lzell/AIProxySwift?tab=readme-ov-file#how-to-use-streaming-tool-calls-with-anthropic
-    func toAnthropicTools() -> [AnthropicTool] {
+    func toAnthropicTools() -> [AIProxyAnthropicTool] {
         guard let allTools else { return [] }
 
         return allTools.map { tool in
-            AnthropicTool(
+            AIProxyAnthropicTool(
                 description: tool.description,
                 inputSchema: tool.inputSchema.toJSONSchema(),
                 name: tool.name
@@ -36,11 +39,11 @@ extension ToolContainer {
 
     // swiftlint:disable:next line_length
     // https://github.com/lzell/AIProxySwift?tab=readme-ov-file#how-to-make-a-tool-call-request-with-llama-and-togetherai
-    func toTogetherAITools() -> [TogetherAITool] {
+    func toTogetherAITools() -> [AIProxyTogetherAITool] {
         guard let allTools else { return [] }
 
         return allTools.map { tool in
-            TogetherAITool(
+            AIProxyTogetherAITool(
                 function: .init(
                     description: tool.description,
                     name: tool.name,
