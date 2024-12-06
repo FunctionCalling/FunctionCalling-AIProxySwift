@@ -5,13 +5,14 @@ import FunctionCalling
 import AIProxy
 
 extension ToolContainer {
+    public typealias AIProxyOpenAITool = OpenAIChatCompletionRequestBody.Tool
     // swiftlint:disable:next line_length
     // https://github.com/lzell/AIProxySwift?tab=readme-ov-file#how-to-use-openai-structured-outputs-json-schemas-in-a-tool-call
-    func toOpenAITools(strict: Bool = false) -> [OpenAIChatCompletionTool] {
+    func toOpenAITools(strict: Bool = false) -> [AIProxyOpenAITool] {
         guard let allTools else { return [] }
 
         return allTools.map { tool in
-            OpenAIChatCompletionTool.function(
+            AIProxyOpenAITool.function(
                 name: tool.name,
                 description: tool.description,
                 parameters: tool.inputSchema.toJSONSchema(),
