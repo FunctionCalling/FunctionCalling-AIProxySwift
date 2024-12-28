@@ -1,13 +1,13 @@
 {
-  "originHash" : "95096db830103dcaa4b28765a391fb508ca97530e81acf629319d2fe67fb9a77",
+  "originHash" : "17e03520338e7a0d6ed4d93aa5bebed6964921d053675f7216fa10f835091113",
   "pins" : [
     {
       "identity" : "aiproxyswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lzell/AIProxySwift.git",
       "state" : {
-        "revision" : "b6e7907bde13316cedd571596c6499acc7e85f7e",
-        "version" : "0.34.0"
+        "revision" : "a71eac7de6e1f9a80a0ba659a66bec7db9196bd6",
+        "version" : "0.49.0"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fumito-ito/FunctionCalling",
       "state" : {
-        "revision" : "24c07c25d57a66b0e34af8d1ffb1192c2b1313a3",
-        "version" : "0.4.0"
+        "revision" : "cd9c2c3d70e10c63e3da670718685825727b52ce",
+        "version" : "0.5.0"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/groue/GRMustache.swift",
       "state" : {
-        "revision" : "c4ee40ef49ae523b06fa470b8d27185ec027330d",
-        "version" : "5.0.1"
+        "revision" : "811326995377af216b970ae3afb0645ca94986c8",
+        "version" : "6.0.0"
       }
     },
     {
