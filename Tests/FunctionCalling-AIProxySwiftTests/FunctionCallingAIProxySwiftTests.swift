@@ -295,6 +295,97 @@ final class FunctionCallingAIProxySwiftTests: XCTestCase {
         }
         XCTAssertEqual(enumValues, ["option1", "option2"])
     }
+
+    func testToDeepSeekTools() throws {
+        let deepSeekTools = toolContainer.toDeepSeekTools()
+
+        XCTAssertEqual(deepSeekTools.count, 1)
+
+        let deepSeekTool = try XCTUnwrap(deepSeekTools.first)
+
+        guard case .function(let name, let description, let parameters) = deepSeekTool else {
+            XCTFail("Cannot unwrap function")
+            return
+        }
+
+        // name
+        XCTAssertEqual(name, "testTool")
+        // description
+        XCTAssertEqual(description, "A test tool")
+
+        // inputSchema
+        guard let parameters else {
+            XCTFail("Parameters should be a dictionary")
+            return
+        }
+
+        // inputSchema.type
+        guard case .string(let type) = parameters["type"] else {
+            XCTFail("Parameters should be a dictionary")
+            return
+        }
+        XCTAssertEqual(type, "object")
+
+        // inputSchema.requiredProperties
+        guard case .array(let required) = parameters["required"] else {
+            XCTFail("Parameters should be a dictionary")
+            return
+        }
+
+        let requiredProperties = required.compactMap { requiredProperty in
+            switch requiredProperty {
+            case .string(let propertyName):
+                return propertyName
+            default:
+                return nil
+            }
+        }
+        XCTAssertEqual(requiredProperties, ["testParam"])
+
+        // inputSchema.properties
+        guard case .object(let properties) = parameters["properties"] else {
+            XCTFail("Parameters should be a dictionary")
+            return
+        }
+        XCTAssertEqual(properties.count, 1)
+
+        // inputSchema.properties.testParam
+        let testParam = try XCTUnwrap(properties["testParam"])
+
+        guard case .object(let prop) = testParam else {
+            XCTFail("Parameters should be a dictionary")
+            return
+        }
+
+        guard case .string(let type) = prop["type"] else {
+            XCTFail("Parameters should be a dictionary")
+            return
+        }
+        XCTAssertEqual(type, "string")
+
+        guard case .string(let description) = prop["description"] else {
+            XCTFail("Parameters should be a dictionary")
+            return
+        }
+        XCTAssertEqual(description, "A test parameter")
+
+        guard case .array(let enumValueArray) = prop["enum"] else {
+            XCTFail("Parameters should be a dictionary")
+            return
+        }
+
+        XCTAssertEqual(enumValueArray.count, 2)
+
+        let enumValues = enumValueArray.compactMap { enumValue in
+            switch enumValue {
+            case .string(let value):
+                return value
+            default:
+                return nil
+            }
+        }
+        XCTAssertEqual(enumValues, ["option1", "option2"])
+    }
     // swiftlint:enable cyclomatic_complexity
     // swiftlint:enable function_body_length
 }

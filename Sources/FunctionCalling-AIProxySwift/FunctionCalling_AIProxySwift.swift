@@ -8,6 +8,7 @@ extension ToolContainer {
     public typealias AIProxyOpenAITool = OpenAIChatCompletionRequestBody.Tool
     public typealias AIProxyAnthropicTool = AnthropicTool
     public typealias AIProxyTogetherAITool = TogetherAITool
+    public typealias AIProxyDeepSeekTool = DeepSeekChatCompletionRequestBody.Tool
 
     // swiftlint:disable:next line_length
     // https://github.com/lzell/AIProxySwift?tab=readme-ov-file#how-to-use-openai-structured-outputs-json-schemas-in-a-tool-call
@@ -49,6 +50,20 @@ extension ToolContainer {
                     name: tool.name,
                     parameters: tool.inputSchema.toJSONSchema()
                 )
+            )
+        }
+    }
+
+    // swiftlint:disable:next line_length
+    // https://github.com/lzell/AIProxySwift/blob/f118afad4941db0ca9c7b6c7f993c483ffd287c6/Sources/AIProxy/DeepSeek/DeepSeekChatCompletionRequestBody.swift#L73-L79
+    public func toDeepSeekTools() -> [AIProxyDeepSeekTool] {
+        guard let allTools else { return [] }
+
+        return allTools.map { tool in
+            AIProxyDeepSeekTool.function(
+                name: tool.name,
+                description: tool.description,
+                parameters: tool.inputSchema.toJSONSchema()
             )
         }
     }
