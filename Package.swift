@@ -20,7 +20,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/fumito-ito/FunctionCalling", from: "0.5.0"),
-        .package(url: "https://github.com/lzell/AIProxySwift.git", from: "0.59.0")
+        .package(url: "https://github.com/lzell/AIProxySwift.git", from: "0.62.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
