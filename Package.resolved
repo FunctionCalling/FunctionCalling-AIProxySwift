@@ -1,13 +1,13 @@
 {
-  "originHash" : "17e03520338e7a0d6ed4d93aa5bebed6964921d053675f7216fa10f835091113",
+  "originHash" : "154f2f373238187d79c917cc57bfa63e038f0fa9bad055b8b83d2662d59a1001",
   "pins" : [
     {
       "identity" : "aiproxyswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lzell/AIProxySwift.git",
       "state" : {
-        "revision" : "a71eac7de6e1f9a80a0ba659a66bec7db9196bd6",
-        "version" : "0.49.0"
+        "revision" : "f118afad4941db0ca9c7b6c7f993c483ffd287c6",
+        "version" : "0.62.0"
       }
     },
     {
