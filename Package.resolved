@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lzell/AIProxySwift.git",
       "state" : {
-        "revision" : "2fa06432d85696791b4cf76963af1325afb83f39",
-        "version" : "0.146.0"
+        "revision" : "f23eba9d9ee9085fcd7e18a7d9cf5259a9638d24",
+        "version" : "0.157.0"
       }
     },
     {
